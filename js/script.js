@@ -1,4 +1,5 @@
 //alert('connected');
+function pageLoaded(){  
     
     //grab form
     const formHandle = document.forms[0];
@@ -16,18 +17,54 @@
     //array to push done into
     let doneArr = [];
     
+    //loop through local storage items and display
+    const storedToDo = JSON.parse(localStorage.getItem("toDo"));
+    
+    if(storedToDo !== null){
+        for(let i = 0; i < storedToDo.length; i++){
+            toDo.innerHTML += `<li>${storedToDo[i]}<button class="ul_todo_button">Doing!</button></li>`;
+        }
+        
+        document.querySelectorAll('.ul_todo_button').forEach(button => button.addEventListener('click', taskToDoing));
+    }
+    
+    const storedDoing = JSON.parse(localStorage.getItem("doing"));
+    
+     if(storedDoing !== null){
+        for(let i = 0; i < storedDoing.length; i++){
+            doing.innerHTML += `<li>${storedDoing[i]}<button class=""ul_doing_button"">Done!</button></li>`;
+        }
+         
+         document.querySelectorAll('.ul_doing_button').forEach(button => button.addEventListener('click', taskToDone)); 
+    }
+    
+    const storedDone = JSON.parse(localStorage.getItem("done"));
+    
+    if(storedDone !== null){
+        for(let i = 0; i < storedDone.length; i++){
+            done.innerHTML += `<li>${storedDone[i]}</li>`;
+        }
+    }
+    
+    
+    
+    
     //function to add task to todo
     function formSubmit(e){
         //prevent default submit behavior        
         e.preventDefault();
-        
+        //push form item into tast array
         taskArr.push(formHandle.task.value);
+        
+        //add to local storage
+        localStorage.setItem("toDo", JSON.stringify(taskArr));
         
         taskToHtml(taskArr);
     }
 
     //loop through task array and put contents into TODO
     function taskToHtml(array){
+        //empty ul html each time
         toDo.innerHTML = '';
         for(let i = 0; i < array.length; i++){
             toDo.innerHTML += `<li>${array[i]}<button class="ul_todo_button">Doing!</button></li>`;
@@ -38,9 +75,12 @@
 
     //function to add todoing
     function taskToDoing(){
-        
+        //empty ul html each time
         doing.innerHTML = '';
         doingArr.push(this.parentElement.textContent.split('Doing!').shift());
+        
+        //add to local storage
+        localStorage.setItem("doing", JSON.stringify(doingArr));
         
         for(let i = 0; i < doingArr.length; i++){
             doing.innerHTML += `<li>${doingArr[i]}<button class="ul_doing_button">Done!</button></li>`;
@@ -51,9 +91,12 @@
 
     //function to add to done 
     function taskToDone(){
-        
+        //empty ul html each time
         done.innerHTML = '';
         doneArr.push(this.parentElement.textContent.split('Done!').shift());
+        
+        //add to local storage
+        localStorage.setItem("done", JSON.stringify(doneArr));
         
         for(let i = 0; i < doneArr.length; i++){
             done.innerHTML += `<li>${doneArr[i]}</li>`;
@@ -63,9 +106,12 @@
 
     //function to clear all
     function clearAll(){
+        //empty all lists
         toDo.innerHTML = '';
         doing.innerHTML = '';
-        done.innerHTML = '';        
+        done.innerHTML = '';
+        //clearn localStorage
+        localStorage.clear();
     }
     
     //listener for form submit
@@ -73,6 +119,8 @@
     
     //listener for clear
     clear.addEventListener('click', clearAll);
+}//end pageLoaded()
+window.onload = pageLoaded;
 
     
 
