@@ -8,6 +8,7 @@ function pageLoaded(){
     const doing = document.querySelector('#ul-doing');
     const done = document.querySelector('#ul-done');
     const clear = document.querySelector('#clear');
+    
     //array to push task into    
     let taskArr = [];
 
@@ -20,22 +21,21 @@ function pageLoaded(){
     //loop through local storage items and display
     const storedToDo = JSON.parse(localStorage.getItem("toDo"));
     
-    if(storedToDo !== null){
-        for(let i = 0; i < storedToDo.length; i++){
-            toDo.innerHTML += `<li>${storedToDo[i]}<button class="ul_todo_button">Doing!</button></li>`;
-        }
-        
-        document.querySelectorAll('.ul_todo_button').forEach(button => button.addEventListener('click', taskToDoing));
-    }
-    
     const storedDoing = JSON.parse(localStorage.getItem("doing"));
     
-     if(storedDoing !== null){
-        for(let i = 0; i < storedDoing.length; i++){
-            doing.innerHTML += `<li>${storedDoing[i]}<button class=""ul_doing_button"">Done!</button></li>`;
+    checkLocalStor(storedToDo, toDo, 'ul_todo_button', 'Doing!');
+    
+    checkLocalStor(storedDoing, doing, 'ul_doing_button', 'Done!')
+    
+    //check local storage function
+    function checkLocalStor(array, element, btnClass, text){
+        if(array !== null){
+            for(let i = 0; i < array.length; i++){
+                element.innerHTML += `<li>${array[i]}<button class="${btnClass}">${text}</button></li>`;
+            }
+            
+            return document.querySelectorAll('.' + btnClass).forEach(button => button.addEventListener('click', taskToDoing)); 
         }
-         
-         document.querySelectorAll('.ul_doing_button').forEach(button => button.addEventListener('click', taskToDone)); 
     }
     
     const storedDone = JSON.parse(localStorage.getItem("done"));
@@ -72,6 +72,7 @@ function pageLoaded(){
         
         return document.querySelectorAll('.ul_todo_button').forEach(button => button.addEventListener('click', taskToDoing));
     }
+    
 
     //function to add todoing
     function taskToDoing(){
