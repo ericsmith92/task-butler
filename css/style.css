@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+/*FONT IMPORTS*/
+
+/*TABLE OF CONTENTS
+====================
+*1.BOX-SIZING, HIDDEN CLASS, PAGE-WRAPPER
+*2.HEADER
+*3.FORM
+*4.COLUMNS
+*5.FOOTER
+*/
+
+/*1.BOX-SIZING, HIDDEN CLASS, PAGE-WRAPPER*/
+
+
+
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/*Hidden*/
+.hidden{
+    position: absolute;
+    left: -10000px;
+}
+
+/*page wrapper*/
+
+#page-wrapper{
+    max-width: 1200px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: pink;
+}
+
+/*2.HEADER*/
+header{
+    height: 100px;
+    width: 100%;
+    border: 1px dashed white;
+}
+
+/*3.FORM*/
+
+#form-container{
+    width: 30%;
+    margin: 1.25rem auto;
+}
+
+/*4.COLUMNS*/
+#column-container{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2.5%;
+    border: 1px dashed blue;
+}
+
+.column{
+    width: 30%;
+    height: 100%;
+    border: 1px dashed green;
+}
+
+.column_heading{
+    text-align: center;
+}
+
+/*5.FOOTER*/
+footer{
+    width: 100%;
+    height: 100px;
+    border: 1px dashed white;
+}
+

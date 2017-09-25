@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Task Butler</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <div id="page-wrapper">
+        
+            <header>
+                <h1>Task Butler</h1>
+                <h2 class="hidden">Header Section</h2>
+            </header>
+            
+            <!--FORM -->
+            <div id="form-container">
+                <form>
+                    <input type="text" name="task" id="task" placeholder="Enter a Task...">
+                    <input type="submit" name="submit" value="Add Task">
+                </form>            
+            </div>
+            
+            <!--COLUMN CONTAINER -->
+            <div id="column-container">
+                <!--LEFT COLUMN-->
+                <div id="column-left" class="column">
+                    <h3 class="column_heading">To Do:</h3>
+                </div>
+                 <!--CENTER COLUMN-->
+                <div id="column-center" class="column">
+                    <h3 class="column_heading">Doing:</h3>
+                </div>
+                 <!--RIGHT COLUMN-->
+                <div id="column-right" class="column">
+                    <h3 class="column_heading">Done:</h3>
+                </div>
+            </div>
+            
+            <footer>
+                <h2 class="hidden">Footer Section</h2>
+                <div id="footer-copyright">	&copy;Eric Smith, 2017. All Rights Reserved.</div>
+            </footer>
+        </div><!--END PAGE-WRAPPER-->    
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>
