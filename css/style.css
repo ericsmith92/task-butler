@@ -42,13 +42,13 @@ html {
 header{
     height: 100px;
     width: 100%;
-    border: 1px dashed white;
+    border-bottom: 1px solid #fff;
 }
 
 h1{
    font-family: 'Pacifico', cursive;
    color: #fff;
-   margin-left: 1.25rem;
+   margin-left: 2.5%;
 
 }
 
@@ -71,7 +71,6 @@ input[type=text]{
     display: flex;
     justify-content: space-between;
     padding: 0 2.5%;
-    border: 1px dashed blue;
 }
 
 .column{
@@ -86,8 +85,21 @@ input[type=text]{
     text-align: center;
     color: #fff;
     font-family: 'Pacifico', cursive;
+    text-decoration: underline;
 }
 
+li{
+    color: #fff;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.checked_off{
+    text-decoration: line-through;
+}
+
+.checked_off button{
+    display: none;
+}
 /*5.BUTTONS*/
 #clear{
     float: right;
@@ -145,6 +157,14 @@ footer{
     .column{
         width: 80%;
         margin: 0 auto;
+    }
+    
+    .column:first-of-type{
+        margin-bottom: 1rem;
+    }
+    
+    .column:last-of-type{
+        margin-top: 1rem;
     }
 }
 

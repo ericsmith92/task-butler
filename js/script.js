@@ -59,6 +59,9 @@ function pageLoaded(){
         localStorage.setItem("toDo", JSON.stringify(taskArr));
         
         taskToHtml(taskArr);
+        
+        //reset text input to empty
+        formHandle.task.value = '';
     }
 
     //loop through task array and put contents into TODO
@@ -85,6 +88,8 @@ function pageLoaded(){
             doing.innerHTML += `<li>${doingArr[i]}<button class="ul_doing_button">Done!</button></li>`;
         }
         
+        this.parentElement.classList.add('checked_off');
+        
          return document.querySelectorAll('.ul_doing_button').forEach(button => button.addEventListener('click', taskToDone));        
     }
 
@@ -96,6 +101,8 @@ function pageLoaded(){
         
         //add to local storage
         localStorage.setItem("done", JSON.stringify(doneArr));
+        
+        this.parentElement.classList.add('checked_off');
         
         for(let i = 0; i < doneArr.length; i++){
             done.innerHTML += `<li>${doneArr[i]}</li>`;
