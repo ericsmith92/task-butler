@@ -10,13 +10,13 @@ function pageLoaded(){
     const clear = document.querySelector('#clear');
     
     //array to push task into    
-    let taskArr = [];
+    let taskArr = JSON.parse(localStorage.getItem("toDo")) !== null ? JSON.parse(localStorage.getItem("toDo")) : [];
 
     //array to push doing into
-    let doingArr = [];
+    let doingArr = JSON.parse(localStorage.getItem("doing")) !== null ? JSON.parse(localStorage.getItem("doing")) : [];
 
     //array to push done into
-    let doneArr = [];
+    let doneArr = JSON.parse(localStorage.getItem("done")) !== null ? JSON.parse(localStorage.getItem("done")) : [];
     
     //loop through local storage items and display
     const storedToDo = JSON.parse(localStorage.getItem("toDo"));
@@ -73,6 +73,22 @@ function pageLoaded(){
         return document.querySelectorAll('.ul_todo_button').forEach(button => button.addEventListener('click', taskToDoing));
     }
     
+    //function to move task
+    /*
+    function moveTask(element, array, btnText, localItem, btnClass, newBtnText){
+        //empty ul html each time
+        element.innerHTML = '';        
+        array.push(this.parentElement.textContent.split(btnText).shift());
+        
+        //add to local storage
+         localStorage.setItem( localItem, JSON.stringify(array));
+        
+        for(let i = 0; i < array.length; i++){
+            element.innerHTML += `<li>${array[i]}<button class="${btnClass}">${newBtnText}</button></li>`;
+        }
+    }
+    */
+    
 
     //function to add todoing
     function taskToDoing(){
@@ -113,6 +129,10 @@ function pageLoaded(){
         done.innerHTML = '';
         //clearn localStorage
         localStorage.clear();
+        //set arrays to empty
+        taskArr = [];
+        doingArr = [];
+        doneArr = [];
     }
     
     //listener for form submit
