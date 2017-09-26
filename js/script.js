@@ -19,13 +19,10 @@ function pageLoaded(){
     let doneArr = JSON.parse(localStorage.getItem("done")) !== null ? JSON.parse(localStorage.getItem("done")) : [];
     
     //loop through local storage items and display
-    const storedToDo = JSON.parse(localStorage.getItem("toDo"));
     
-    const storedDoing = JSON.parse(localStorage.getItem("doing"));
+    checkLocalStor(taskArr, toDo, 'ul_todo_button', 'Doing!');
     
-    checkLocalStor(storedToDo, toDo, 'ul_todo_button', 'Doing!');
-    
-    checkLocalStor(storedDoing, doing, 'ul_doing_button', 'Done!')
+    checkLocalStor(doingArr, doing, 'ul_doing_button', 'Done!');
     
     //check local storage function
     function checkLocalStor(array, element, btnClass, text){
@@ -34,7 +31,11 @@ function pageLoaded(){
                 element.innerHTML += `<li>${array[i]}<button class="${btnClass}">${text}</button></li>`;
             }
             
-            return document.querySelectorAll('.' + btnClass).forEach(button => button.addEventListener('click', taskToDoing)); 
+            let funcCall = btnClass === 'ul_todo_button' ? taskToDoing : taskToDone;
+            
+            console.log(funcCall);
+            
+            return document.querySelectorAll('.' + btnClass).forEach(button => button.addEventListener('click', funcCall)); 
         }
     }
     
@@ -46,9 +47,7 @@ function pageLoaded(){
         }
     }
     
-    
-    
-    
+        
     //function to add task to todo
     function formSubmit(e){
         //prevent default submit behavior        
@@ -73,23 +72,6 @@ function pageLoaded(){
         return document.querySelectorAll('.ul_todo_button').forEach(button => button.addEventListener('click', taskToDoing));
     }
     
-    //function to move task
-    /*
-    function moveTask(element, array, btnText, localItem, btnClass, newBtnText){
-        //empty ul html each time
-        element.innerHTML = '';        
-        array.push(this.parentElement.textContent.split(btnText).shift());
-        
-        //add to local storage
-         localStorage.setItem( localItem, JSON.stringify(array));
-        
-        for(let i = 0; i < array.length; i++){
-            element.innerHTML += `<li>${array[i]}<button class="${btnClass}">${newBtnText}</button></li>`;
-        }
-    }
-    */
-    
-
     //function to add todoing
     function taskToDoing(){
         //empty ul html each time
@@ -142,7 +124,3 @@ function pageLoaded(){
     clear.addEventListener('click', clearAll);
 }//end pageLoaded()
 window.onload = pageLoaded;
-
-    
-
-
