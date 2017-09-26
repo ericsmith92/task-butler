@@ -8,6 +8,7 @@ function pageLoaded(){
     const doing = document.querySelector('#ul-doing');
     const done = document.querySelector('#ul-done');
     const clear = document.querySelector('#clear');
+    const error = document.querySelector('.error');
     
     //array to push task into    
     let taskArr = JSON.parse(localStorage.getItem("toDo")) !== null ? JSON.parse(localStorage.getItem("toDo")) : [];
@@ -33,8 +34,6 @@ function pageLoaded(){
             
             let funcCall = btnClass === 'ul_todo_button' ? taskToDoing : taskToDone;
             
-            console.log(funcCall);
-            
             return document.querySelectorAll('.' + btnClass).forEach(button => button.addEventListener('click', funcCall)); 
         }
     }
@@ -47,11 +46,37 @@ function pageLoaded(){
         }
     }
     
+    const toDoLi = toDo.querySelectorAll('li');
+    const doingLi = doing.querySelectorAll('li');
+    
+    checkOff('Doing!', toDoLi, doingArr);
+    checkOff('Done!', doingLi, doneArr);
+    
+    //function apply class of checked_off to completed items
+    function checkOff(seperator, nodeList, array){
+            
+        for(let i = 0; i < nodeList.length; i++){
+            let node = nodeList[i].textContent.split(seperator);
+            
+            if(array.includes(node[0])){
+                nodeList[i].classList.add('checked_off');
+            }
+        }
+                
+    }
+    
         
     //function to add task to todo
     function formSubmit(e){
         //prevent default submit behavior        
         e.preventDefault();
+        //reset error to blank
+        error.innerHTML = '';
+        //error for empty input
+        if(formHandle.task.value === ''){
+            error.innerHTML = 'Please Enter a Task.';
+            return;
+        }else{
         //push form item into tast array
         taskArr.push(formHandle.task.value);
         
@@ -62,6 +87,7 @@ function pageLoaded(){
         
         //reset text input to empty
         formHandle.task.value = '';
+        }
     }
 
     //loop through task array and put contents into TODO
